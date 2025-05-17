@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "5c94ea4e-706d-4bf8-911d-59befb088ca5",
+		"name": "2. Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41701667"
+	},
+	"item": [
+		{
+			"name": "Manager Pending Requests",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ3MDQ1ODc4LCJleHAiOjE3NDcwNDk0Nzh9.QhpUjQkqBncsjw-0JPIaLdkFfRBLHGWfGYtmX1aWE5Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/leave-requests/pending",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"leave-requests",
+						"pending"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reject Leave Request",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ3MDQ2NzQxLCJleHAiOjE3NDcwNTAzNDF9.AA4WYEVoq-MMq5DnR1SgP6oZIGj3o2EjzT9nFm51DI8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"leaveRequestId\": 4,\r\n  \"reason\": \"testing custom reason\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/leave-requests/reject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"leave-requests",
+						"reject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Approve Leave Request",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ3MDQyNzEyLCJleHAiOjE3NDcwNDYzMTJ9.l7I3kcn8doN67p52-R3lBoUJb7lGT-ErRPhUXnfefGc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"leaveRequestId\": 3\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/leave-requests/approve",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"leave-requests",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Managed Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ3MDUyMTIzLCJleHAiOjE3NDcwNTU3MjN9.NVQbQi44VLSYvPd8vEY0HjxwGsYY9NWrGHAia3J_4Uw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/leave-requests/managed-users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"leave-requests",
+						"managed-users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Manager Remaining Leave",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ3MDY0NDgzLCJleHAiOjE3NDcwNjgwODN9.VckTeeh4Hv6cO8tliedJ3aFALE4Ht8WuvJRlMYAesow",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/leave-requests/remaining/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"leave-requests",
+						"remaining",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pending leave requests per employee report",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ3Mzg5MzAxLCJleHAiOjE3NDczOTI5MDF9._CdyRNt0hz_PxIZVmjOrbkDSWSpXDG2o4Kzmhkibn8o",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/leave-requests/reports/pending-summary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"leave-requests",
+						"reports",
+						"pending-summary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upcoming Leave (30 days) Report",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNzQ3MzkwNzE5LCJleHAiOjE3NDczOTQzMTl9.XoHaqpDxdJRcJwTtc2Qj2RZCp8nR_mH_P1D5oHw0pPQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/leave-requests/reports/upcoming-leaves\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"leave-requests",
+						"reports",
+						"upcoming-leaves\n"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

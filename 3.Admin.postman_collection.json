@@ -1,0 +1,481 @@
+{
+	"info": {
+		"_postman_id": "427e6292-39ac-437c-bee1-c188671dc8e9",
+		"name": "3. Admin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41701667"
+	},
+	"item": [
+		{
+			"name": "Check Admin",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/auth/admin-only",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"admin-only"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Register User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJlbXBsb3llZSIsImlhdCI6MTc0NzEzMDA5NiwiZXhwIjoxNzQ3MTMzNjk2fQ.2ABLkSHsgPJptOzPyCCoQn8X8uPSS_E2amLHNYmiXfM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstname\": \"Test\",\r\n  \"surname\": \"One\",\r\n  \"email\": \"TestAdmin@example.com\",\r\n  \"password\": \"secure123\",\r\n  \"roleId\": 1,\r\n  \"department\": \"Ops\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/admin/add-user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"add-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Users",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzEzMTkxNSwiZXhwIjoxNzQ3MTM1NTE1fQ.Pq8Qm9xqX6QRx_yUpGYNJPWZY6Wt2bz5cbBEOHnfmqc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/admin/all-users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"all-users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Roles",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": " Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzEzMjQ2NSwiZXhwIjoxNzQ3MTM2MDY1fQ.zgNIC67zt8_nRucms-7TZcwPYwjj1Dpwrz6UnyxaFxs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"roleId\": 2\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/admin/update-role/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"update-role",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Department",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzEzMjQ2NSwiZXhwIjoxNzQ3MTM2MDY1fQ.zgNIC67zt8_nRucms-7TZcwPYwjj1Dpwrz6UnyxaFxs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"department\": \"Customer Support\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/admin/update-department/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"update-department",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pending Leave Requests",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzEzNDA2MiwiZXhwIjoxNzQ3MTM3NjYyfQ.3thL1FYEezHPZE4Msc8WMgd737gfZRAnCNyw0pZOcSA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/admin/all-leave-requests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"all-leave-requests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ID Filtered Leave Requests",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzEzNDA2MiwiZXhwIjoxNzQ3MTM3NjYyfQ.3thL1FYEezHPZE4Msc8WMgd737gfZRAnCNyw0pZOcSA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/admin/all-leave-requests?userId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"all-leave-requests"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Managers Team Leave Requests",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzEzNDA2MiwiZXhwIjoxNzQ3MTM3NjYyfQ.3thL1FYEezHPZE4Msc8WMgd737gfZRAnCNyw0pZOcSA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/admin/all-leave-requests?managerId=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"all-leave-requests"
+					],
+					"query": [
+						{
+							"key": "managerId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Approve Leave",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzEzNTA4MywiZXhwIjoxNzQ3MTM4NjgzfQ.-jUnXFDqyBwqUqi7UX_Rs0XD4l-bwcst9azGamI6VCs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/admin/approve/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"approve",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "System Wide Usage Track",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzEzOTU3OCwiZXhwIjoxNzQ3MTQzMTc4fQ.W217SC9IcnhZj1YhSSgZC7fsSCH_2D2NFSNDyGRltsA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/admin/leave-usage-stats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"leave-usage-stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Change Annual Leave Balance",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzE0NTk1MSwiZXhwIjoxNzQ3MTQ5NTUxfQ.-6tPmziMjSXcUq2O_e8r75E7ZY-MFa_VOnYG-z2u3xg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"balance\": 20\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/admin/update-leave-balance/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"update-leave-balance",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Manager",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzIxOTc5MywiZXhwIjoxNzQ3MjIzMzkzfQ.8a-6hMor1hM-SOfnbK6Go7r5_HXcoTMJ2RANId3VfAM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"employeeId\": 4,\r\n  \"managerId\": 5,\r\n  \"startDate\": \"2024-06-01\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/admin/assign-manager",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"assign-manager"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Company Leave Summary Report",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzM5MjgxOSwiZXhwIjoxNzQ3Mzk2NDE5fQ.Z7M0D03jb0WKfRtOSmB_WGYB8dlx95FGaNyaZ-3UXLo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/admin/reports/company-summary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"reports",
+						"company-summary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Department Leave Usage",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NzM5MzE5OCwiZXhwIjoxNzQ3Mzk2Nzk4fQ.vzuByb_mpr5McHadeGmkHYkJGd_awLSODUMrRj6U4PQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/admin/reports/department-usage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"admin",
+						"reports",
+						"department-usage"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
