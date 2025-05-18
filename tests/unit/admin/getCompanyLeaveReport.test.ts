@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 
-// fake LeaveRequest repo
+
 const fakeRepo = {
   find: jest.fn(),
 }
 
-// mock AppDataSource before importing the controller
+
 jest.mock('../../../src/ormconfig', () => ({
   AppDataSource: {
     getRepository: () => fakeRepo,
@@ -25,7 +25,7 @@ describe('getCompanyLeaveSummary (unit)', () => {
     jsonMock = jest.fn()
     statusMock = jest.fn().mockReturnValue({ json: jsonMock })
     res = { status: statusMock as any, json: jsonMock }
-    // default to admin
+    
     req = { user: { userId: 1, role: 'admin' } }
   })
 
@@ -37,7 +37,7 @@ describe('getCompanyLeaveSummary (unit)', () => {
   })
 
   it('200 and returns correct summary', async () => {
-    // two approved leaves for two users/depts
+    
     fakeRepo.find.mockResolvedValue([
       {
         leaveRequestId: 10,
@@ -65,8 +65,7 @@ describe('getCompanyLeaveSummary (unit)', () => {
 
     await getCompanyLeaveSummary(req as Request, res as Response)
 
-    // total requests = 2
-    // days: Alice = 3 days (1→3), Bob = 1 day
+    
     expect(jsonMock).toHaveBeenCalledWith({
       message: 'Company-wide leave usage summary',
       data: {

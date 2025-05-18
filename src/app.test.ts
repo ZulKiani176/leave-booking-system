@@ -10,7 +10,6 @@ app.disable('x-powered-by');
 app.use(express.json());
 app.use(apiLimiter);
 
-// Inject mock user directly into request (used only for tests)
 app.use((req, res, next) => {
   const testAuth = req.headers['x-test-user'];
   if (testAuth) {

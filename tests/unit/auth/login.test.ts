@@ -1,9 +1,8 @@
-// tests/unit/auth/login.test.ts
+
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 
-// 1) Mock the ORM before importing the controller
 const mockUserRepo = { findOne: jest.fn() };
 jest.mock('../../../src/ormconfig', () => ({
   AppDataSource: {
@@ -11,12 +10,10 @@ jest.mock('../../../src/ormconfig', () => ({
   },
 }));
 
-// 2) Mock jwt.sign
 jest.mock('jsonwebtoken', () => ({
   sign: jest.fn(),
 }));
 
-// 3) Import after mocks are in place
 import { login } from '../../../src/controllers/auth.controller';
 
 describe('login (unit)', () => {
@@ -64,7 +61,7 @@ describe('login (unit)', () => {
       password: 'correcthash',
       role: { name: 'employee' },
     });
-    // Return an object whose toString('hex') != 'correcthash'
+    
     jest.spyOn(crypto, 'pbkdf2Sync').mockReturnValue({
       toString: (_: string) => 'wronghash',
     } as any);
@@ -83,7 +80,7 @@ describe('login (unit)', () => {
       password: 'correcthash',
       role: { name: 'employee' },
     });
-    // Return an object whose toString('hex') === 'correcthash'
+    
     jest.spyOn(crypto, 'pbkdf2Sync').mockReturnValue({
       toString: (_: string) => 'correcthash',
     } as any);

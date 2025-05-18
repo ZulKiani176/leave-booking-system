@@ -37,7 +37,7 @@ describe('Admin – getAllUsers', () => {
     expect(json.message).toBe('All users in the system');
     expect(Array.isArray(json.data)).toBe(true);
     expect(json.data.length).toBeGreaterThan(0);
-    // make sure each element has at least these keys:
+    
     expect(json.data[0]).toMatchObject({
       userId: expect.any(Number),
       firstname: expect.any(String),

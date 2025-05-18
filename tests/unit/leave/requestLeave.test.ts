@@ -1,4 +1,4 @@
-// tests/unit/leave/requestLeave.test.ts
+
 import { requestLeave } from '../../../src/controllers/leave-request.controller';
 import { AppDataSource } from '../../../src/ormconfig';
 import { User } from '../../../src/entities/user';

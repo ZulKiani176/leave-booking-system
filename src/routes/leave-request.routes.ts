@@ -10,8 +10,8 @@ import {
   approveLeave,
   rejectLeave,
   getPendingRequests,
-  getManagedEmployees,             // ✅ Existing
-  getEmployeeLeaveBalance          // ✅ New import
+  getManagedEmployees,             
+  getEmployeeLeaveBalance          
 } from '../controllers/leave-request.controller';
 
 const router = Router();
@@ -55,7 +55,7 @@ router.get('/managed-users', authMiddleware, async (req: Request, res: Response)
   await getManagedEmployees(req, res);
 });
 
-// ✅ NEW: View remaining leave of a specific employee (manager only)
+//  View remaining leave of a specific employee (manager only)
 router.get('/remaining/:userId', authMiddleware, async (req: Request, res: Response): Promise<void> => {
   await getEmployeeLeaveBalance(req, res);
 });
@@ -65,7 +65,7 @@ router.get('/remaining', authMiddleware, async (req: Request, res: Response): Pr
   await getRemainingLeave(req, res);
 });
 
-// ✅ NEW: Summary report of pending requests per managed employee
+// Summary report of pending requests per managed employee
 router.get('/reports/pending-summary', authMiddleware, async (req: Request, res: Response): Promise<void> => {
   await getPendingRequestsSummary(req, res);
 });

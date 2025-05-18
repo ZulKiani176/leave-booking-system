@@ -1,7 +1,6 @@
 import { rejectLeave } from '../../../src/controllers/leave-request.controller';
 import { AppDataSource } from '../../../src/ormconfig';
 
-// 1) Mock TypeORM so no real DB or metadata is loaded
 jest.mock('../../../src/ormconfig', () => ({
   AppDataSource: {
     getRepository: jest.fn(),
@@ -10,7 +9,7 @@ jest.mock('../../../src/ormconfig', () => ({
 
 describe('rejectLeave (unit, fully mocked)', () => {
   it('rejects a pending leave request with custom reason', async () => {
-    // 2) Prepare mock user & leave
+    
     const mockUser = { userId: 1, annualLeaveBalance: 10 };
     const mockLeave = {
       leaveRequestId: 456,
@@ -21,17 +20,14 @@ describe('rejectLeave (unit, fully mocked)', () => {
       reason: '',
     };
 
-    // 3) Stub repository methods
     const findOneMock = jest.fn().mockResolvedValue(mockLeave);
     const saveMock = jest.fn().mockResolvedValue(undefined);
 
-    // 4) getRepository returns our stub for LeaveRequest
     (AppDataSource.getRepository as jest.Mock).mockReturnValue({
       findOne: findOneMock,
       save: saveMock,
     });
 
-    // 5) Fake Express req/res
     const req = {
       body: { leaveRequestId: 456, reason: 'Low staffing' },
       user: { role: 'manager', userId: 1 },
@@ -40,16 +36,13 @@ describe('rejectLeave (unit, fully mocked)', () => {
     const jsonMock = jest.fn();
     const res = { json: jsonMock } as any;
 
-    // 6) Call the controller
     await rejectLeave(req, res);
 
-    // 7) Verify findOne was called correctly
     expect(findOneMock).toHaveBeenCalledWith({
       where: { leaveRequestId: 456 },
       relations: ['user'],
     });
 
-    // 8) Verify save updated status & reason
     expect(saveMock).toHaveBeenCalledWith(
       expect.objectContaining({
         status: 'Rejected',
@@ -57,7 +50,6 @@ describe('rejectLeave (unit, fully mocked)', () => {
       })
     );
 
-    // 9) Verify JSON response
     expect(jsonMock).toHaveBeenCalledWith(
       expect.objectContaining({
         message: expect.stringMatching(/has been rejected/i),
@@ -85,7 +77,7 @@ describe('rejectLeave (unit, fully mocked)', () => {
     });
 
     const req = {
-      body: { leaveRequestId: 789 },  // no reason
+      body: { leaveRequestId: 789 },  
       user: { role: 'manager', userId: 2 },
     } as any;
 

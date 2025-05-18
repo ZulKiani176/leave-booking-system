@@ -9,8 +9,6 @@ import crypto from 'crypto';
 const userRepo = AppDataSource.getRepository(User);
 const roleRepo = AppDataSource.getRepository(Role);
 
-// Optional: leave this commented out for now
-// export const register = async (req: Request, res: Response) => { ... };
 
 export const login = async (req: Request, res: Response) => {
   try {
@@ -31,7 +29,7 @@ export const login = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Invalid credentials' });
     }
 
-    // 🔐 Match password using crypto.pbkdf2Sync (same as admin registration)
+    // 
     const inputHash = crypto.pbkdf2Sync(password, user.salt, 1000, 64, 'sha512').toString('hex');
 
     if (inputHash !== user.password) {

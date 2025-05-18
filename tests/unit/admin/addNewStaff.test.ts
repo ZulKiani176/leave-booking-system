@@ -1,11 +1,11 @@
-// tests/unit/admin/addNewStaff.test.ts
+
 import { addNewStaff } from '../../../src/controllers/admin.controller';
 import { AppDataSource } from '../../../src/ormconfig';
 import { User } from '../../../src/entities/user';
 import { Role } from '../../../src/entities/role';
 import { Request, Response } from 'express';
 
-// 1) Mock AppDataSource
+
 jest.mock('../../../src/ormconfig', () => ({
   AppDataSource: { getRepository: jest.fn() },
 }));
@@ -54,7 +54,7 @@ describe('addNewStaff (unit)', () => {
   });
 
   it('400 if email already in use', async () => {
-    userRepo.findOne.mockResolvedValue({ userId: 99 }); // existing user
+    userRepo.findOne.mockResolvedValue({ userId: 99 }); 
     const req = {
       user: { role: 'admin' },
       body: {
@@ -77,7 +77,7 @@ describe('addNewStaff (unit)', () => {
 
   it('400 if roleId invalid', async () => {
     userRepo.findOne.mockResolvedValue(null);
-    roleRepo.findOne.mockResolvedValue(null); // no such role
+    roleRepo.findOne.mockResolvedValue(null); 
     const req = {
       user: { role: 'admin' },
       body: {

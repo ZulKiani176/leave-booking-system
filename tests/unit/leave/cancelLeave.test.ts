@@ -1,4 +1,4 @@
-// tests/unit/leave/cancelLeave.test.ts
+
 import { cancelLeave } from '../../../src/controllers/leave-request.controller';
 import { AppDataSource } from '../../../src/ormconfig';
 import { User } from '../../../src/entities/user';
@@ -58,7 +58,7 @@ describe('cancelLeave (unit)', () => {
   });
 
   it('403 if not owner or admin', async () => {
-    // leave owned by userId 2, current user is 1
+    
     leaveRepo.findOne.mockResolvedValue({
       leaveRequestId: 5,
       status: 'Pending',
@@ -89,7 +89,7 @@ describe('cancelLeave (unit)', () => {
   });
 
   it('adds back days if approved, then cancels', async () => {
-    // simulate approved leave of 3 days
+    
     const leave = {
       leaveRequestId: 10,
       status: 'Approved',
@@ -107,7 +107,7 @@ describe('cancelLeave (unit)', () => {
     );
     await cancelLeave(req, res);
 
-    // days = 3
+    
     expect(userRepo.save).toHaveBeenCalledWith(
       expect.objectContaining({ userId: 1, annualLeaveBalance: 5 + 3 })
     );
@@ -144,7 +144,7 @@ describe('cancelLeave (unit)', () => {
     );
     await cancelLeave(req, res);
 
-    // no userRepo.save call since status was Pending
+    
     expect(userRepo.save).not.toHaveBeenCalled();
     expect(leaveRepo.save).toHaveBeenCalledWith(
       expect.objectContaining({ leaveRequestId: 20, status: 'Cancelled' })

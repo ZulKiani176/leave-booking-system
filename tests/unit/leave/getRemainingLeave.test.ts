@@ -1,4 +1,4 @@
-// tests/leave/getRemainingLeave.test.ts
+
 import { getRemainingLeave } from '../../../src/controllers/leave-request.controller';
 import { AppDataSource } from '../../../src/ormconfig';
 import { Request, Response } from 'express';
@@ -9,19 +9,16 @@ jest.mock('../../../src/ormconfig', () => ({
 
 describe('getRemainingLeave (unit, fully mocked)', () => {
   it('returns remaining leave for a valid user', async () => {
-    // 1) Stub User repo to return a user with 15 days remaining
+    
     const findOneMock = jest.fn().mockResolvedValue({ userId: 7, annualLeaveBalance: 15 });
     (AppDataSource.getRepository as jest.Mock).mockReturnValue({ findOne: findOneMock });
 
-    // 2) Mock req/res
     const req = { user: { userId: 7 } } as any as Request;
     const jsonMock = jest.fn();
     const res = { json: jsonMock } as any as Response;
 
-    // 3) Call controller
     await getRemainingLeave(req, res);
 
-    // 4) Assertions
     expect(findOneMock).toHaveBeenCalledWith({ where: { userId: 7 } });
     expect(jsonMock).toHaveBeenCalledWith({
       message: 'Status of leave requests for employee_id 7',

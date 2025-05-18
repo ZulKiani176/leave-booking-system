@@ -1,7 +1,6 @@
-// tests/unit/leave-request/getUpcomingTeamLeaves.test.ts
+
 import { Request, Response } from 'express'
 
-// Extend Request type to support custom `user`
 interface MockRequest extends Partial<Request> {
   user?: {
     userId: number
@@ -9,10 +8,8 @@ interface MockRequest extends Partial<Request> {
   }
 }
 
-// fakeRepo for both managementRepo.find() and leaveRepo.find()
 const fakeRepo = { find: jest.fn() }
 
-// mock AppDataSource
 jest.mock('../../../src/ormconfig', () => ({
   AppDataSource: {
     getRepository: () => fakeRepo,
@@ -56,7 +53,7 @@ describe('getUpcomingTeamLeaves (unit)', () => {
       { user: { userId: 22, firstname: 'Dana', surname: 'Dane' } },
     ]
     fakeRepo.find
-      .mockResolvedValueOnce(managed)  // managementRepo.find
+      .mockResolvedValueOnce(managed)  
       .mockResolvedValueOnce([
         {
           user:      { userId: 11, firstname: 'Carl', surname: 'Cole' },
@@ -68,7 +65,7 @@ describe('getUpcomingTeamLeaves (unit)', () => {
           startDate: '2025-06-05',
           endDate:   '2025-06-08',
         },
-      ]) // leaveRepo.find
+      ]) 
 
     req = { user: { userId: 5, role: 'manager' } }
     await getUpcomingTeamLeaves(req as Request, res as Response)
@@ -81,7 +78,7 @@ describe('getUpcomingTeamLeaves (unit)', () => {
     const args = fakeRepo.find.mock.calls[1][0]
     expect(args.relations).toEqual(['user'])
     expect(args.where.status).toBe('Approved')
-    // @ts-ignore
+    
     expect(args.where.user.userId._value).toEqual([11, 22])
 
     expect(jsonMock).toHaveBeenCalledWith({

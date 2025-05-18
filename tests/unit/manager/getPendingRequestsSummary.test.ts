@@ -1,19 +1,18 @@
 import { Request, Response } from 'express'
 
-// fakeRepo for both managementRepo.find() and leaveRepo.count()
 const fakeRepo = {
   find: jest.fn(),
   count: jest.fn(),
 }
 
-// mock AppDataSource.getRepository → fakeRepo
+
 jest.mock('../../../src/ormconfig', () => ({
   AppDataSource: {
     getRepository: () => fakeRepo,
   },
 }))
 
-// Extend request type to allow user
+
 type MockRequest = Partial<Request> & {
   user?: { userId: number; role: string }
 }
@@ -48,8 +47,8 @@ describe('getPendingRequestsSummary (unit)', () => {
     ]
     fakeRepo.find.mockResolvedValueOnce(managed)
     fakeRepo.count
-      .mockResolvedValueOnce(3) // Amy
-      .mockResolvedValueOnce(0) // Bob
+      .mockResolvedValueOnce(3) 
+      .mockResolvedValueOnce(0) 
 
     req = { user: { userId: 7, role: 'manager' } }
 

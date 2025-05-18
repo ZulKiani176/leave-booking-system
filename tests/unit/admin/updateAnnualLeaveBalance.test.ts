@@ -1,19 +1,19 @@
-// tests/unit/admin/updateAnnualLeaveBalance.test.ts
+
 import { Request, Response } from 'express';
 import { AppDataSource } from '../../../src/ormconfig';
 
-// 1) Mock logger to avoid file writes
+
 jest.mock('../../../src/utils/logger', () => ({
   logClientError: jest.fn(),
 }));
 
-// 2) Mock ORM before importing the controller
+
 const mockUserRepo = { findOne: jest.fn(), save: jest.fn() };
 jest.mock('../../../src/ormconfig', () => ({
   AppDataSource: { getRepository: jest.fn().mockReturnValue(mockUserRepo) },
 }));
 
-// 3) Import after mocks
+
 import { updateAnnualLeaveBalance } from '../../../src/controllers/admin.controller';
 import { User } from '../../../src/entities/user';
 

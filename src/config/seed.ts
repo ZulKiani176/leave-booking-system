@@ -13,7 +13,7 @@ const seedRoles = async () => {
   const userRepo = AppDataSource.getRepository(User);
   const userManagementRepo = AppDataSource.getRepository(UserManagement);
 
-  // 1. Seed roles
+  // Seed roles
   const rolesToInsert = [
     { roleId: 1, name: 'employee' },
     { roleId: 2, name: 'manager' },
@@ -30,7 +30,7 @@ const seedRoles = async () => {
     }
   }
 
-  // 2. ✅ Auto-create admin user
+  // Auto-create admin user
   const adminExists = await userRepo.findOne({ where: { email: 'admin@example.com' } });
   if (!adminExists) {
     const salt = crypto.randomBytes(16).toString('hex');
@@ -48,12 +48,12 @@ const seedRoles = async () => {
     });
 
     await userRepo.save(admin);
-    console.log('✅ Admin user created: admin@example.com / admin123');
+    console.log(' Admin user created: admin@example.com / admin123');
   } else {
-    console.log('ℹ️ Admin user already exists. Skipping.');
+    console.log('ℹAdmin user already exists. Skipping.');
   }
 
-  // 2b. ✅ Add test manager + employee
+  // Add test manager + employee
   const unitManagerEmail = 'unit-manager@example.com';
   const unitEmployeeEmail = 'unit-employee@example.com';
 
@@ -103,7 +103,7 @@ const seedRoles = async () => {
     console.log(`ℹ️ Test employee '${unitEmployeeEmail}' already exists. Skipping.`);
   }
 
-  // 3. Seed user management mapping
+  // Seed user management mapping
   const employee = await userRepo.findOne({ where: { email: unitEmployeeEmail } });
   const manager = await userRepo.findOne({ where: { email: unitManagerEmail } });
 
@@ -127,7 +127,7 @@ const seedRoles = async () => {
     console.log('Manager or employee user not found. Mapping skipped.');
   }
 
-  // ✅ NEW: Add 'unit-other' employee
+  // NEW: Add 'unit-other' employee
   const otherExists = await userRepo.findOne({ where: { email: 'unit-other@example.com' } });
   if (!otherExists) {
     const salt = crypto.randomBytes(16).toString('hex');
@@ -146,12 +146,12 @@ const seedRoles = async () => {
     });
 
     await userRepo.save(other);
-    console.log(`✅ Test secondary employee created: unit-other@example.com / secure123`);
+    console.log(` Test secondary employee created: unit-other@example.com / secure123`);
   } else {
-    console.log('ℹ️ Test secondary employee already exists. Skipping.');
+    console.log('ℹ Test secondary employee already exists. Skipping.');
   }
 
-  // ✅ NEW: Add 'unit-admin'
+  // NEW: Add 'unit-admin'
   const unitAdminExists = await userRepo.findOne({ where: { email: 'unit-admin@example.com' } });
   if (!unitAdminExists) {
     const salt = crypto.randomBytes(16).toString('hex');

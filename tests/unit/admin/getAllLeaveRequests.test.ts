@@ -1,10 +1,10 @@
-// tests/unit/admin/getAllLeaveRequests.test.ts
+
 import { Request, Response } from 'express'
 
-// fake repo used for both the managementRepo.find() and leaveRepo.find()
+
 const fakeRepo = { find: jest.fn() }
 
-// mock AppDataSource
+
 jest.mock('../../../src/ormconfig', () => ({
   AppDataSource: {
     getRepository: () => fakeRepo,
@@ -122,9 +122,9 @@ describe('getAllLeaveRequests (unit)', () => {
   it('200 filtered by managerId query', async () => {
     req.query = { managerId: '5' }
     fakeRepo.find
-      // first call returns managed entries
+      
       .mockResolvedValueOnce([{ user: { userId: 10 } }])
-      // second call returns pending leaves
+      
       .mockResolvedValueOnce([
         {
           leaveRequestId: 3,
@@ -142,19 +142,17 @@ describe('getAllLeaveRequests (unit)', () => {
 
     await getAllLeaveRequests(req as Request, res as Response)
 
-    // first call: managementRepo.find
+    
     expect(fakeRepo.find).toHaveBeenNthCalledWith(1, {
       where:     { manager: { userId: 5 } },
       relations: ['user'],
     })
 
-    // second call: leaveRepo.find — loosen expectation on the In(...) operator
+    
     const secondArgs = fakeRepo.find.mock.calls[1][0]
     expect(secondArgs.relations).toEqual(['user'])
     expect(secondArgs.where.status).toBe('Pending')
-    // the userId filter should be a TypeORM In([...]) operator whose `.value` is [10]
-    // we check for that underlying array:
-    // @ts-ignore
+    
     expect(secondArgs.where.user.userId._value).toEqual([10])
 
     expect(jsonMock).toHaveBeenCalledWith({

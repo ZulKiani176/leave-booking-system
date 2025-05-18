@@ -7,7 +7,7 @@ import { LeaveRequest } from './entities/leave-request';
 import { UserManagement } from './entities/user-management';
 
 
-config(); // load env
+config(); 
 
 export const AppDataSource = new DataSource({
   type: 'mysql',

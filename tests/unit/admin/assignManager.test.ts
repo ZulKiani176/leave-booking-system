@@ -1,14 +1,14 @@
-// tests/unit/admin/assignManager.test.ts
+
 import { Request, Response } from 'express';
 
-// 1) Define fakeRepo at the very top
+
 const fakeRepo = {
   findOne: jest.fn(),
   create:  jest.fn(),
   save:    jest.fn(),
 };
 
-// 2) Mock AppDataSource before we import anything that uses it
+
 jest.mock('../../../src/ormconfig', () => ({
   AppDataSource: {
     getRepository: () => fakeRepo,
@@ -16,7 +16,7 @@ jest.mock('../../../src/ormconfig', () => ({
 }));
 
 describe('assignManager (unit)', () => {
-  // 3) Require the controller *after* our mock is in place
+  
   const { assignManager } = require('../../../src/controllers/admin.controller');
 
   let req: Partial<Request>;
@@ -51,7 +51,7 @@ describe('assignManager (unit)', () => {
   it('400 if missing employeeId or managerId', async () => {
     req = {
       user: { userId: 1, role: 'admin' },
-      body: { managerId: 2 },  // missing employeeId
+      body: { managerId: 2 },  
     };
 
     await assignManager(req as Request, res as Response);
@@ -61,7 +61,7 @@ describe('assignManager (unit)', () => {
   });
 
   it('404 if employee or manager not found', async () => {
-    // simulate employee lookup returns null
+    
     fakeRepo.findOne.mockResolvedValueOnce(null);
 
     req = {
@@ -76,10 +76,10 @@ describe('assignManager (unit)', () => {
   });
 
   it('400 if selected user is not a manager', async () => {
-    // first call: employee exists
+    
     fakeRepo.findOne
       .mockResolvedValueOnce({ userId: 1, firstname: 'E', surname: 'E', role: { name: 'employee' } })
-      // second call: manager exists, but role != 'manager'
+      
       .mockResolvedValueOnce({ userId: 2, firstname: 'M', surname: 'M', role: { name: 'employee' } });
 
     req = {
@@ -94,9 +94,9 @@ describe('assignManager (unit)', () => {
   });
 
   it('201 and saves new assignment on success', async () => {
-    // 1) employee found
+    
     const employeeObj = { userId: 1, firstname: 'E', surname: 'E', role: { name: 'employee' } };
-    // 2) manager found with role 'manager'
+    
     const managerObj  = { userId: 2, firstname: 'M', surname: 'M', role: { name: 'manager' } };
 
     fakeRepo.findOne
@@ -104,7 +104,7 @@ describe('assignManager (unit)', () => {
       .mockResolvedValueOnce(managerObj)     // manager
       .mockResolvedValueOnce(null);          // no existing link
 
-    // prepare create/save mocks
+    
     const createdLink = {
       user:      employeeObj,
       manager:   managerObj,
@@ -120,7 +120,7 @@ describe('assignManager (unit)', () => {
 
     await assignManager(req as Request, res as Response);
 
-    // verify that we created and saved the correct object
+    
     expect(fakeRepo.create).toHaveBeenCalledWith(createdLink);
     expect(fakeRepo.save).toHaveBeenCalledWith(createdLink);
 

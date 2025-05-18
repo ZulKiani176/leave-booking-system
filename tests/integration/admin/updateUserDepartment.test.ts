@@ -17,7 +17,7 @@ describe('Admin – updateUserDepartment', () => {
   });
 
   afterAll(async () => {
-    // restore original dept
+    
     const repo = AppDataSource.getRepository(User);
     await repo.update({ userId: existingUserId }, { department: ORIGINAL_DEPT });
     await AppDataSource.destroy();
@@ -44,7 +44,7 @@ describe('Admin – updateUserDepartment', () => {
       url: `/api/admin/users/${existingUserId}/department`,
       params: { userId: existingUserId.toString() },
       user: { role: 'admin', userId: 1 },
-      body: { }, // no department
+      body: { }, 
     });
     const res = httpMocks.createResponse();
     await updateUserDepartment(req as any, res as any);
@@ -84,7 +84,7 @@ describe('Admin – updateUserDepartment', () => {
     expect(res._getJSONData().message)
       .toBe(`Department updated for user ${existingUserId}`);
 
-    // verify in DB
+    
     const repo = AppDataSource.getRepository(User);
     const updated = await repo.findOne({ where: { userId: existingUserId } });
     expect(updated!.department).toBe(NEW_DEPT);

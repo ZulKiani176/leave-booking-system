@@ -1,4 +1,4 @@
-// tests/unit/admin/getAllUsers.test.ts
+
 import { getAllUsers } from '../../../src/controllers/admin.controller';
 import { AppDataSource } from '../../../src/ormconfig';
 import { User } from '../../../src/entities/user';

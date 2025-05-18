@@ -15,12 +15,12 @@ router.post('/login', async (req: Request, res: Response): Promise<void> => {
   await login(req, res);
 });
 
-// Public route
+// Ping route
 router.get('/ping', (req: Request, res: Response): void => {
   res.json({ message: 'pong' });
 });
 
-// Protected route - any authenticated user
+// authenticate user
 router.get('/protected', authMiddleware, (req: Request, res: Response): void => {
   res.json({
     message: `Hello user ${req.user?.userId}, your role is ${req.user?.role}`,

@@ -32,8 +32,8 @@ describe('requestLeave() basic tests', () => {
         endDate: '2025-07-03'
       });
 
-    expect(res.status).toBe(400); // If controller fails to find user, this will be 400 or 500
-    expect(res.body.error).toMatch(/invalid employee id/i); // Adjust this to whatever message is actually returned
+    expect(res.status).toBe(400); 
+    expect(res.body.error).toMatch(/invalid employee id/i); 
   });
 
   it('should reject request if startDate is missing', async () => {

@@ -85,7 +85,7 @@ switch (requestedType) {
 
 const leave = leaveRepo.create({
   user,
-  leaveType: leaveTypeObj.name, // Annual Leave
+  leaveType: leaveTypeObj.name, 
   startDate,
   endDate,
   status: 'Pending',
@@ -445,7 +445,7 @@ export const getManagedEmployees = async (req: Request, res: Response): Promise<
   }
 };
 
-// NEW: Manager can view specific employee's leave balance
+// Manager can view specific employee's leave balance
 export const getEmployeeLeaveBalance = async (req: Request, res: Response): Promise<Response> => {
   try {
     const managerId = req.user?.userId;

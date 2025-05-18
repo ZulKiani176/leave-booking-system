@@ -39,7 +39,7 @@ describe('Admin – addNewStaff', () => {
   });
 
   it('should add a brand-new staff member', async () => {
-    // generate a totally new email to avoid collisions
+    
     const uniqueEmail = `test${Date.now()}@example.com`;
     const req = httpMocks.createRequest({
       method: 'POST',
@@ -51,7 +51,7 @@ describe('Admin – addNewStaff', () => {
         email: uniqueEmail,
         password: 'p@ssw0rd',
         department: 'QA',
-        roleId: 1,              // employee
+        roleId: 1,              
       },
     });
     const res = httpMocks.createResponse();

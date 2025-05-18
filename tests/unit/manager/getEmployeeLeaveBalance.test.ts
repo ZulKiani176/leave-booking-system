@@ -1,4 +1,4 @@
-// tests/manager/getEmployeeLeaveBalance.test.ts
+
 import { getEmployeeLeaveBalance } from '../../../src/controllers/leave-request.controller';
 import { AppDataSource } from '../../../src/ormconfig';
 import { UserManagement } from '../../../src/entities/user-management';
@@ -38,12 +38,12 @@ describe('getEmployeeLeaveBalance (unit, fully mocked)', () => {
   });
 
   it('403 if manager does not manage that employee', async () => {
-    // managementRepo.findOne returns null
+    
     getRepo.mockImplementation((entity) => {
       if (entity === UserManagement) {
         return { findOne: jest.fn().mockResolvedValue(null) };
       }
-      // should not call User repo in this branch
+      
       return { findOne: jest.fn() };
     });
 
@@ -59,7 +59,7 @@ describe('getEmployeeLeaveBalance (unit, fully mocked)', () => {
   });
 
   it('400 if managed but employee not found', async () => {
-    // managementRepo.findOne returns truthy, userRepo.findOne returns null
+    
     getRepo.mockImplementation((entity) => {
       if (entity === UserManagement) {
         return { findOne: jest.fn().mockResolvedValue({ id: 99 }) };
@@ -83,7 +83,7 @@ describe('getEmployeeLeaveBalance (unit, fully mocked)', () => {
   });
 
   it('200 and JSON body on success', async () => {
-    // managementRepo.findOne returns truthy, userRepo.findOne returns a user
+    
     const mockUser = { userId: 2, firstname: 'Jane', surname: 'Smith', annualLeaveBalance: 12 };
     getRepo.mockImplementation((entity) => {
       if (entity === UserManagement) {

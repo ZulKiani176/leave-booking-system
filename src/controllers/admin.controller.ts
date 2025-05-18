@@ -8,7 +8,7 @@ import { logClientError } from '../utils/logger';
 import { In } from 'typeorm';
 import crypto from 'crypto';
 
-// ✅ Add new staff member (admin only)
+// Add new staff member (admin only)
 export const addNewStaff = async (req: Request, res: Response): Promise<Response> => {
   try {
     const role = req.user?.role;
@@ -65,7 +65,7 @@ export const addNewStaff = async (req: Request, res: Response): Promise<Response
   }
 };
 
-// ✅ Update user role (admin only)
+//  Update user role (admin only)
 export const updateUserRole = async (req: Request, res: Response): Promise<Response> => {
   try {
     const adminRole = req.user?.role;
@@ -94,7 +94,7 @@ export const updateUserRole = async (req: Request, res: Response): Promise<Respo
   }
 };
 
-// ✅ Update user department (admin only)
+// Update user department (admin only)
 export const updateUserDepartment = async (req: Request, res: Response): Promise<Response> => {
   try {
     const adminRole = req.user?.role;
@@ -123,7 +123,7 @@ export const updateUserDepartment = async (req: Request, res: Response): Promise
   }
 };
 
-// ✅ View all users (admin only)
+// View all users (admin only)
 export const getAllUsers = async (req: Request, res: Response): Promise<Response> => {
   try {
     const role = req.user?.role;
@@ -152,7 +152,7 @@ export const getAllUsers = async (req: Request, res: Response): Promise<Response
   }
 };
 
-// ✅ View all leave requests with optional filters (admin only)
+// View all leave requests with optional filters (admin only)
 export const getAllLeaveRequests = async (req: Request, res: Response): Promise<Response> => {
   try {
     const role = req.user?.role;
@@ -207,7 +207,7 @@ export const getAllLeaveRequests = async (req: Request, res: Response): Promise<
   }
 };
 
-// ✅ Approve a leave request (admin only)
+// Approve a leave request (admin only)
 export const approveLeaveAsAdmin = async (req: Request, res: Response): Promise<Response> => {
   try {
     const role = req.user?.role;
@@ -266,7 +266,7 @@ export const approveLeaveAsAdmin = async (req: Request, res: Response): Promise<
   }
 };
 
-// ✅ Leave usage statistics (admin only)
+// Leave usage statistics (admin only)
 export const getLeaveUsageStatistics = async (req: Request, res: Response): Promise<Response> => {
   try {
     const role = req.user?.role;
@@ -316,7 +316,7 @@ export const getLeaveUsageStatistics = async (req: Request, res: Response): Prom
   }
 };
 
-// ✅ Update annual leave balance (admin only)
+// Update annual leave balance (admin only)
 export const updateAnnualLeaveBalance = async (req: Request, res: Response): Promise<Response> => {
   try {
     const adminRole = req.user?.role;
@@ -351,7 +351,7 @@ export const updateAnnualLeaveBalance = async (req: Request, res: Response): Pro
   }
 };
 
-// ✅ Assign a manager to an employee (admin only)
+// Assign a manager to an employee (admin only)
 export const assignManager = async (req: Request, res: Response): Promise<Response> => {
   try {
     const role = req.user?.role;
@@ -405,7 +405,7 @@ export const assignManager = async (req: Request, res: Response): Promise<Respon
   }
 };
 
-// ✅ Company Leave Summary (admin only)
+// Company Leave Summary (admin only)
 export const getCompanyLeaveSummary = async (req: Request, res: Response): Promise<Response> => {
   try {
     const role = req.user?.role;
@@ -452,7 +452,7 @@ export const getCompanyLeaveSummary = async (req: Request, res: Response): Promi
   }
 };
 
-// ✅ Department-level leave usage summary (admin only)
+// Department-level leave usage summary (admin only)
 export const getDepartmentLeaveUsageReport = async (req: Request, res: Response): Promise<Response> => {
   try {
     const role = req.user?.role;

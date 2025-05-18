@@ -3,7 +3,6 @@ import path from 'path';
 
 const logPath = path.join(__dirname, '..', '..', 'logs');
 
-// Ensure logs directory exists
 if (!fs.existsSync(logPath)) {
   fs.mkdirSync(logPath);
 }

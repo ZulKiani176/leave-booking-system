@@ -1,11 +1,10 @@
 import { Request, Response } from 'express'
 
-// fake LeaveRequest repo
 const fakeRepo = {
   find: jest.fn(),
 }
 
-// mock AppDataSource
+
 jest.mock('../../../src/ormconfig', () => ({
   AppDataSource: {
     getRepository: () => fakeRepo,
@@ -59,7 +58,7 @@ describe('getDepartmentLeaveUsageReport (unit)', () => {
 
     await getDepartmentLeaveUsageReport(req as Request, res as Response)
 
-    // Sales: (2 days)+(3 days)=5, Marketing:1
+    
     expect(jsonMock).toHaveBeenCalledWith({
       message: 'Department-wise leave usage',
       data: {

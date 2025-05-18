@@ -96,7 +96,7 @@ describe('requestLeave() rejection cases', () => {
       .send({
         leaveType: 'Annual Leave',
         startDate: '2025-12-01',
-        endDate: '2026-01-31', // ~2 months
+        endDate: '2026-01-31', 
       });
 
     expect(res.status).toBe(400);

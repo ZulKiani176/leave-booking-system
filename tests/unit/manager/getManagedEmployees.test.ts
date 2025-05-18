@@ -9,7 +9,7 @@ jest.mock('../../../src/ormconfig', () => ({
 
 describe('getManagedEmployees()', () => {
   it('should return a JSON list of employees under this manager', async () => {
-    // 1) prepare fake repo
+    
     const fakeFind = jest.fn().mockResolvedValue([
       { user: { userId: 2, firstname: 'Alice', surname: 'Brown' } },
       { user: { userId: 3, firstname: 'Bob',   surname: 'Jones' } }
@@ -18,7 +18,7 @@ describe('getManagedEmployees()', () => {
       find: fakeFind
     })
 
-    // 2) fake req & res
+  
     const req = {
   user: { userId: 1, role: 'manager' }
 } as Partial<Request> as Request
@@ -26,10 +26,10 @@ describe('getManagedEmployees()', () => {
     const json = jest.fn()
     const res = { json } as unknown as Response
 
-    // Act
+    
     await getManagedEmployees(req, res)
 
-    // Assert
+    
     expect(AppDataSource.getRepository).toHaveBeenCalledWith(UserManagement)
     expect(fakeFind).toHaveBeenCalledWith({
       where: { manager: { userId: 1 } },
