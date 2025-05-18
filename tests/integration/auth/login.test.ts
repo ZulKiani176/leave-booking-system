@@ -1,8 +1,8 @@
 import request from 'supertest';
-import app from '../../src/app';
-import { AppDataSource } from '../../src/ormconfig';
-import { User } from '../../src/entities/user';
-import { hashPassword } from '../../src/utils/hash';
+import app from '../../../src/app';
+import { AppDataSource } from '../../../src/ormconfig';
+import { User } from '../../../src/entities/user';
+import { hashPassword } from '../../../src/utils/hash';
 import crypto from 'crypto';
 
 describe('login()', () => {

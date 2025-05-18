@@ -1,4 +1,4 @@
-import { hashPassword, comparePassword } from '../../src/utils/hash';
+import { hashPassword, comparePassword } from '../../../src/utils/hash';
 import crypto from 'crypto';
 
 describe('Password hashing', () => {

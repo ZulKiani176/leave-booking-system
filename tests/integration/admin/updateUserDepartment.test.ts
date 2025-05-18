@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import httpMocks from 'node-mocks-http';
-import { AppDataSource } from '../../src/ormconfig';
-import { updateUserDepartment } from '../../src/controllers/admin.controller';
-import { User } from '../../src/entities/user';
+import { AppDataSource } from '../../../src/ormconfig';
+import { updateUserDepartment } from '../../../src/controllers/admin.controller';
+import { User } from '../../../src/entities/user';
 
 describe('Admin – updateUserDepartment', () => {
   let existingUserId: number;

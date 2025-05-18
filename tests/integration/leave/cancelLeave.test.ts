@@ -1,8 +1,8 @@
 import request from 'supertest';
-import app from '../../src/app';
-import { AppDataSource } from '../../src/ormconfig';
-import { User } from '../../src/entities/user';
-import { LeaveRequest } from '../../src/entities/leave-request';
+import app from '../../../src/app';
+import { AppDataSource } from '../../../src/ormconfig';
+import { User } from '../../../src/entities/user';
+import { LeaveRequest } from '../../../src/entities/leave-request';
 import jwt from 'jsonwebtoken';
 
 let employeeToken: string;

@@ -1,11 +1,11 @@
 import request from 'supertest';
-import app from '../../src/app';
+import app from '../../../src/app';
 import jwt from 'jsonwebtoken';
-import { AppDataSource } from '../../src/ormconfig';
-import { User } from '../../src/entities/user';
-import { Role } from '../../src/entities/role';
-import { LeaveRequest } from '../../src/entities/leave-request';
-import { UserManagement } from '../../src/entities/user-management';
+import { AppDataSource } from '../../../src/ormconfig';
+import { User } from '../../../src/entities/user';
+import { Role } from '../../../src/entities/role';
+import { LeaveRequest } from '../../../src/entities/leave-request';
+import { UserManagement } from '../../../src/entities/user-management';
 
 beforeAll(async () => {
   if (!AppDataSource.isInitialized) {

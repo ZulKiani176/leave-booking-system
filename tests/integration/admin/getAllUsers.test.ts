@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import httpMocks from 'node-mocks-http';
-import { AppDataSource } from '../../src/ormconfig';
-import { getAllUsers } from '../../src/controllers/admin.controller';
+import { AppDataSource } from '../../../src/ormconfig';
+import { getAllUsers } from '../../../src/controllers/admin.controller';
 
 describe('Admin – getAllUsers', () => {
   beforeAll(async () => {

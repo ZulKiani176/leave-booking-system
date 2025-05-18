@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import httpMocks from 'node-mocks-http';
 import crypto from 'crypto';
-import { AppDataSource } from '../../src/ormconfig';
-import { addNewStaff } from '../../src/controllers/admin.controller';
+import { AppDataSource } from '../../../src/ormconfig';
+import { addNewStaff } from '../../../src/controllers/admin.controller';
 
 describe('Admin – addNewStaff', () => {
   beforeAll(async () => {
