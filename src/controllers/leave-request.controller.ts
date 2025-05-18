@@ -4,6 +4,8 @@ import { LeaveRequest } from '../entities/leave-request';
 import { User } from '../entities/user';
 import { UserManagement } from '../entities/user-management';
 import { logClientError } from '../utils/logger';
+import { AdminUser, ManagerUser } from '../models/base-user';
+import { AnnualLeave, SickLeave, LeaveType } from '../models/leave-types';
 import { Between } from 'typeorm';
 import { In } from 'typeorm';
 
@@ -68,13 +70,28 @@ export const requestLeave = async (req: Request, res: Response): Promise<Respons
         .json({ error: 'Date range of request overlaps with existing request' });
     }
 
-    const leave = leaveRepo.create({
-      user,
-      leaveType: 'Annual Leave',
-      startDate,
-      endDate,
-      status: 'Pending',
-    });
+    const requestedType = req.body.leaveType || 'Annual Leave';
+
+let leaveTypeObj: LeaveType;
+switch (requestedType) {
+  case 'Sick Leave':
+    leaveTypeObj = new SickLeave();
+    break;
+  case 'Annual Leave':
+  default:
+    leaveTypeObj = new AnnualLeave();
+    break;
+} 
+
+const leave = leaveRepo.create({
+  user,
+  leaveType: leaveTypeObj.name, // Annual Leave
+  startDate,
+  endDate,
+  status: 'Pending',
+  reason: leaveTypeObj.getPolicyNote(),
+});
+
 
     await leaveRepo.save(leave);
 
@@ -250,6 +267,16 @@ export const approveLeave = async (req: Request, res: Response): Promise<Respons
       logClientError(400, 'Invalid leave request ID', req.originalUrl, req.method, req.user?.userId);
       return res.status(400).json({ error: 'Invalid leave request ID' });
     }
+
+    // polymorphic user logic
+let logicUser;
+if (role === 'admin') {
+  logicUser = new AdminUser(leave.user);
+} else {
+  logicUser = new ManagerUser(leave.user);
+}
+console.log('Approver:', logicUser.getFullName(), '| Privileges:', logicUser.getPrivileges());
+
 
     if (leave.status !== 'Pending') {
       logClientError(400, 'Only pending requests can be approved', req.originalUrl, req.method, req.user?.userId);
