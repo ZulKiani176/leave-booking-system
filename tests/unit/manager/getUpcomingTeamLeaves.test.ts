@@ -1,6 +1,14 @@
 // tests/unit/leave-request/getUpcomingTeamLeaves.test.ts
 import { Request, Response } from 'express'
 
+// Extend Request type to support custom `user`
+interface MockRequest extends Partial<Request> {
+  user?: {
+    userId: number
+    role: string
+  }
+}
+
 // fakeRepo for both managementRepo.find() and leaveRepo.find()
 const fakeRepo = { find: jest.fn() }
 
@@ -14,7 +22,9 @@ jest.mock('../../../src/ormconfig', () => ({
 describe('getUpcomingTeamLeaves (unit)', () => {
   const { getUpcomingTeamLeaves } =
     require('../../../src/controllers/leave-request.controller')
-  let req: Partial<Request>, res: Partial<Response>
+
+  let req: MockRequest
+  let res: Partial<Response>
   let statusMock: jest.Mock, jsonMock: jest.Mock
 
   beforeEach(() => {
@@ -63,12 +73,11 @@ describe('getUpcomingTeamLeaves (unit)', () => {
     req = { user: { userId: 5, role: 'manager' } }
     await getUpcomingTeamLeaves(req as Request, res as Response)
 
-    // first call
     expect(fakeRepo.find).toHaveBeenNthCalledWith(1, {
       where:     { manager: { userId: 5 } },
       relations: ['user'],
     })
-    // second call: inspect the TypeORM In(...) operator’s underlying array
+
     const args = fakeRepo.find.mock.calls[1][0]
     expect(args.relations).toEqual(['user'])
     expect(args.where.status).toBe('Approved')

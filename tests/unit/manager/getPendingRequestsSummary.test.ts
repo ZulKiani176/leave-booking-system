@@ -13,15 +13,23 @@ jest.mock('../../../src/ormconfig', () => ({
   },
 }))
 
+// Extend request type to allow user
+type MockRequest = Partial<Request> & {
+  user?: { userId: number; role: string }
+}
+
 describe('getPendingRequestsSummary (unit)', () => {
   const { getPendingRequestsSummary } =
     require('../../../src/controllers/leave-request.controller')
-  let req: Partial<Request>, res: Partial<Response>
-  let statusMock: jest.Mock, jsonMock: jest.Mock
+
+  let req: MockRequest
+  let res: Partial<Response>
+  let statusMock: jest.Mock
+  let jsonMock: jest.Mock
 
   beforeEach(() => {
     jest.clearAllMocks()
-    jsonMock   = jest.fn()
+    jsonMock = jest.fn()
     statusMock = jest.fn().mockReturnValue({ json: jsonMock })
     res = { status: statusMock as any, json: jsonMock }
   })
@@ -40,16 +48,18 @@ describe('getPendingRequestsSummary (unit)', () => {
     ]
     fakeRepo.find.mockResolvedValueOnce(managed)
     fakeRepo.count
-      .mockResolvedValueOnce(3)   // Amy
-      .mockResolvedValueOnce(0)   // Bob
+      .mockResolvedValueOnce(3) // Amy
+      .mockResolvedValueOnce(0) // Bob
 
     req = { user: { userId: 7, role: 'manager' } }
+
     await getPendingRequestsSummary(req as Request, res as Response)
 
-    expect(fakeRepo.find).toHaveBeenNthCalledWith(1, {
-      where:     { manager: { userId: 7 } },
+    expect(fakeRepo.find).toHaveBeenCalledWith({
+      where: { manager: { userId: 7 } },
       relations: ['user'],
     })
+
     expect(fakeRepo.count).toHaveBeenNthCalledWith(1, {
       where: { user: { userId: 10 }, status: 'Pending' },
     })

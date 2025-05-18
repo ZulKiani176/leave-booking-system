@@ -19,7 +19,10 @@ describe('getManagedEmployees()', () => {
     })
 
     // 2) fake req & res
-    const req = { user: { userId: 1, role: 'manager' } } as Request
+    const req = {
+  user: { userId: 1, role: 'manager' }
+} as Partial<Request> as Request
+
     const json = jest.fn()
     const res = { json } as unknown as Response
 
